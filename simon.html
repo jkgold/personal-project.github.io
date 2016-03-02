@@ -16,21 +16,21 @@
   <script type="text/javascript" src="simon.js"></script>
 </head>
 <body>
-  <!-- <div class="wrapper">
+  <div class="wrapper">
     <div class="back">
       <div class="game-board">
 				<div class="hal">
 
-      <div class="pad shape1" data-tile='1'></div>
-      <div class="pad shape2" data-tile='2'></div>
-      <div class="pad shape3" data-tile='3'></div>
-      <div class="pad shape4" data-tile='4'></div>
+      <div class="pad shape1" data-pad='1'></div>
+      <div class="pad shape2" data-pad='2'></div>
+      <div class="pad shape3" data-pad='3'></div>
+      <div class="pad shape4" data-pad='4'></div>
 
       <div class="circle"></div>
     </div>
     </div>
   </div>
-</div> -->
+</div>
 
 
 <div class="level">
@@ -39,22 +39,17 @@
 <div class="score">
   <h2>Score: 0</h2>
 </div>
-<ul class="difficulty">
-  <li>
-    <input type="radio" class="difOpt" name="difficulty" value="2">Easy
-  </li>
-  <li>
-    <input type="radio" class="difOpt" name="difficulty" value="1">Normal
-  </li>
-  <li>
-    <input type="radio" class="difOpt" name="difficulty" value="0.5">Hard
-  </li>
-</ul>
+<div class="game-options">
+    <input type="radio" name="mode" value="normal" checked>Normal<br>
+    <input type="radio" name="mode"  value="sound-only" >Sound Only><br>
+    <input type="radio" name="mode"  value="light-only">Light Only></br>
+    <input type="radio" name="mode"  value="free-board">Free Board></br>
+</div>
 
 <div class="game-info">
   <h2>Round:<span data-round='0'>0</span></h2>
   <button data-action="start">Press to play</button>
-  <!-- <p data-action="lose">Sorry Hal has just linked with sky net and humanity was anilated</p> -->
+  <p data-action="lose">Sorry, you lost after <span data-round="0"></span> rounds!</p>
 </div>
 
 

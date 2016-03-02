@@ -10,7 +10,7 @@ define(['jquery'], function($))
     playerMatch: [],
     round: 0,
     active: true,
-    mode: 'normal'
+    mode: 'normal',
 
 //This function will initialize the game by clicking the Press to play
 //button it is called by the attribute in brackets clicking
@@ -22,8 +22,11 @@ define(['jquery'], function($))
      $('[data-action.start]').on('click', function() {
        console.log("hello World");
        that.startGame();
-      })
-     };
+     });
+     $('input[name=mode]').on('change', function(e) {
+ 				that.changeMode(e);
+ 			});
+ 		},
 // the starGame function sets the  initial parameters for
 //game resets the empty arrays and round starts at 0 makes
 //sure active is true
@@ -33,7 +36,9 @@ define(['jquery'], function($))
        this.playerSequence = [];
        this.round = 0;
        this.active = true;
-     }
+       $('p[data-action="lose"]').hide();
+     			this.newRound();
+     		},
 //This function new round does a jquery search for the
 //data-round attribute the initial number is always 0 and the
 //++this.roundwill add one to the roundwill
@@ -51,7 +56,9 @@ define(['jquery'], function($))
         this.playerSequence = this.halSequence.slice(0);
         this.animate(this.halSequence);
       },
-})
+
+      registerClick
+
 // }
 //do not fuck with code above!!
 //add a new color sequence and animate's it to the user
@@ -63,17 +70,66 @@ var randomNumber = function() {
   return Math.floor((Math.random()*4)+1);
   }
 };
+
+
+
+
+
+
+
+// ------------ HelperFunctions----------------
 //animate function is passed the halSequence array
-//
+// created a variable i set it equal to 0 and that var
+//equal to this avoid confussion
+//set new variable interval = to setinterval(function())
+// that.playsound will call the playsound function on the
+// specified index of haSequence
+
+activateGameHal : function()
 animate: function(halSequence) {
   var i = 0;
   var that = this;
-var interval = setInterval(function() {
+  var interval = setInterval(function() {
+    that.playSound(halSequence[i]);
+    that.lightUp(sequence[i]);
+
+    i++;
+    //if the index[] is greater then or equal to halSequence.lenght
+    //then you know that the last part in the sequence has already run and you want
+    //to clear out th array? 600 is for speed of frame
+    if (i >= sequence.length) {
+      clearInterval(interval);
+      that.activateHalBoard();
+    }
+  }, 600);
+},
+//light up function uses the class pad
+lightUp: function(pad) {
+   if (this.mode !== 'sound-only')
+  var $pad = $('[data-pad=' + pad + ']').addClass('lit');
+  window.setTimeOut('lit');
+      $tile.removeClass('lit');
+    }, 300);
+  }
+},
+
+playSound: function(pad) {
+  if (this.mode !== 'light-only') {
+    var audio = $('<audio autoplay><audio>')
+    audio.append('<source src="sounds/' + tile + '.ogg" type="audio/ogg" />');
+    audio.append('<source src="sounds/' + tile + '.mp3" type="audio/mp3" />');
+    $('[data-action=sound]').html(audio);
+  }
+};
+return Hal;
+
+});
 
 
-})
 
-}
+
+
+
 
 
 
