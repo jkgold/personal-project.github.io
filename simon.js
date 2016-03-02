@@ -57,10 +57,29 @@ define(['jquery'], function($))
         this.animate(this.halSequence);
       },
 
-      registerClick
+      registerClick: function(e) {
+        var desiredResponse = this.playerSequence.shift();
+        var actualResponse =$(e.target).data('pad');
+        this.active = (desiredResponse === actualResponse);
+        this.checkLose();
+      },
+      checkLose: function(){
+        if (this.copy.length === 0 && this.active) {
+          this.deactivatGameHal();
+          this.newRound();
+        } else if (!this.active) {
+          this.deactivatGameHal();
+          this.endGame();
+        }
+      },
+
+      endGame: function() {
+        $('p[data-action=lose]').show();
+        $($('[data-round]').get(0)).text('0');
+      },
 
 // }
-//do not fuck with code above!!
+
 //add a new color sequence and animate's it to the user
 
 // helperfunctions
@@ -89,7 +108,8 @@ changeMode: function(e) {
 
 activateGameHal : function() {
   var that = this;
-  $('.hal').on('click', '[data-pad]', function(e) {
+  $('.hal')
+  .on('click', '[data-pad]', function(e) {
     that.activateGameHal(e);
   })
 
@@ -101,6 +121,16 @@ activateGameHal : function() {
     $(this).removeClass('active');
   });
 
+},
+
+deactivatGameHal: function(){
+  if (this.mode !=='free-board'){
+    $('.hal')
+    .off('click', '[data-pad]');
+    .off('mousedown', '[data-pad]');
+    .off('mouseup', '[data-pad]');
+
+  }
 },
 animate: function(halSequence) {
   var i = 0;
