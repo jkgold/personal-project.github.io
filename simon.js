@@ -71,7 +71,9 @@ var randomNumber = function() {
   }
 };
 
-
+changeMode: function(e) {
+  this.mode = e.target.value;
+},
 
 
 
@@ -85,7 +87,21 @@ var randomNumber = function() {
 // that.playsound will call the playsound function on the
 // specified index of haSequence
 
-activateGameHal : function()
+activateGameHal : function() {
+  var that = this;
+  $('.hal').on('click', '[data-pad]', function(e) {
+    that.activateGameHal(e);
+  })
+
+  .on('mousedown', '[data-pad]', function(){
+    $(this).addClass('active');
+    that.playSound((this).data('pad'));
+  })
+  .on('mouseup', '[data-pad]' function(){
+    $(this).removeClass('active');
+  });
+
+},
 animate: function(halSequence) {
   var i = 0;
   var that = this;
