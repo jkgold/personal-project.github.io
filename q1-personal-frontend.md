@@ -33,7 +33,8 @@
 
   jg: Jason Goldfarb
   *Jason Goldfarb
-    *
+    *[simon] https://github.com/jkgold/personal-project.github.io
+    *[Codebase] https://github.com/jkgold/personal-project.github.io/tree/gh-pages
 
 
   ld: Lincoln Dennis
